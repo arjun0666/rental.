@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Equipment Rentals</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url('images/rental.jpg') no-repeat center center/cover;
+            color: #333;
+        }
+
+        /* Header */
+        header {
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 1rem;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* Sections */
+        section {
+            display: none;
+            padding: 3rem;
+            background-color: rgba(255, 255, 255, 0.8);
+            text-align: center;
+        }
+
+        section.active {
+            display: block;
+        }
+
+        /* Product Section */
+        .product-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .product-card {
+            background-color: white;
+            padding: 1.5rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .product-card img {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .product-card button {
+            margin-top: 10px;
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+            cursor: pointer;
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+
+        .product-card button:hover {
+            background: #218838;
+        }
+
+        /* Added Equipment Section */
+        #added-section {
+            margin-top: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2rem;
+        }
+
+        .added-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+
+        .quantity-btn {
+            padding: 0.5rem;
+            font-size: 1rem;
+            margin: 0 5px;
+            cursor: pointer;
+            border: none;
+            background: #007bff;
+            color: white;
+            border-radius: 50%;
+        }
+
+        .quantity-btn:hover {
+            background: #0056b3;
+        }
+
+        /* Contact Form */
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        input, textarea, button {
+            padding: 0.75rem;
+            font-size: 1rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1rem 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="logo">
+            <h1>Medical Equipment Rentals</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a onclick="showSection('home')">Home</a></li>
+                <li><a onclick="showSection('products')">Equipments</a></li>
+                <li><a onclick="showSection('added-section')">Added Equipments</a></li>
+                <li><a onclick="showSection('contact')">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Home Section -->
+    <section id="home" class="active">
+        <h2>Welcome to Medical Equipment Rentals</h2>
+        <p>Get medical equipment delivered to your doorstep.</p>
+    </section>
+
+     <!-- Equipment Section -->
+    <section id="products">
+        <h2>Our Equipment for Rent</h2>
+        <div class="product-list">
+            <div class="product-card">
+                <img src="images/wheelchair.jpg" alt="Wheelchair">
+                <h3>Wheelchair</h3>
+                <p>Price: ₹400/week</p>
+                <button onclick="addEquipment('Wheelchair', 400)">Add</button>
+            </div>
+            <div class="product-card">
+                <img src="images/oxygen.jpg" alt="Oxygen Concentrator">
+                <h3>Oxygen Concentrator</h3>
+                <p>Price: ₹650/week</p>
+                <button onclick="addEquipment('Oxygen Concentrator', 650)">Add</button>
+            </div>
+            <div class="product-card">
+                <img src="images/hospital-bed.jpg" alt="Hospital Bed">
+                <h3>Hospital Bed</h3>
+                <p>Price: ₹800/week</p>
+                <button onclick="addEquipment('Hospital Bed', 800)">Add</button>
+            </div>
+            <div class="product-card">
+                <img src="images/crutches.jpg" alt="Crutches">
+                <h3>Crutches</h3>
+                <p>Price: ₹1600/week</p>
+                <button onclick="addEquipment('Crutches', 1600)">Add</button>
+            </div>
+            <div class="product-card">
+                <img src="images/nebulizer.jpg" alt="Nebulizer Machine">
+                <h3>Nebulizer Machine</h3>
+                <p>Price: ₹2400/week</p>
+                <button onclick="addEquipment('Nebulizer Machine', 2400)">Add</button>
+            </div>
+            <div class="product-card">
+                <img src="images/bp.jpg" alt="Blood Pressure Monitor">
+                <h3>Blood Pressure Monitor</h3>
+                <p>Price: ₹200/week</p>
+                <button onclick="addEquipment('Blood Pressure Monitor', 200)">Add</button>
+            </div>
+        </div>
+        <p id="total-added-items">Total Equipment Added: 0</p>
+    </section>
+
+    <!-- Added Equipment Section -->
+    <section id="added-section">
+        <h2>Added Equipment</h2>
+        <div id="added-equipment">
+            <p>No equipment added yet.</p>
+        </div>
+    </section>
+
+    <!-- Contact Us Section -->
+    <section id="contact">
+        <h2>Contact Us</h2>
+        <p>Email: <a href="mailto:arjunonline63@gmail.com">arjunonline63@gmail.com</a></p>
+        <p>Customer Care Number: 040 30297137</p>
+        <form id="contact-form">
+            <input type="text" id="name" placeholder="Your Name" required>
+            <input type="email" id="email" placeholder="Your Email" required>
+            <textarea id="message" placeholder="Your Message" required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Medical Equipment Rentals | All Rights Reserved</p>
+    </footer>
+
+    <script>
+        let addedEquipment = {};
+
+        function showSection(sectionId) {
+            document.querySelectorAll('section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(sectionId).classList.add('active');
+        }
+
+        function addEquipment(name, price) {
+            if (addedEquipment[name]) {
+                addedEquipment[name].quantity++;
+            } else {
+                addedEquipment[name] = { price: price, quantity: 1 };
+            }
+            updateAddedEquipment();
+        }
+
+        function updateAddedEquipment() {
+            const addedSection = document.getElementById('added-equipment');
+            const totalItems = document.getElementById('total-added-items');
+            addedSection.innerHTML = '';
+
+            let totalCount = 0;
+            if (Object.keys(addedEquipment).length === 0) {
+                addedSection.innerHTML = '<p>No equipment added yet.</p>';
+                totalItems.innerText = 'Total Equipment Added: 0';
+                return;
+            }
+
+            Object.keys(addedEquipment).forEach(name => {
+                const item = addedEquipment[name];
+                totalCount += item.quantity;
+
+                const div = document.createElement('div');
+                div.classList.add('added-item');
+                div.innerHTML = `
+                    <span>${name} - ₹${item.price} per week</span>
+                    <span>
+                        <button class="quantity-btn" onclick="changeQuantity('${name}', -1)">-</button>
+                        ${item.quantity}
+                        <button class="quantity-btn" onclick="changeQuantity('${name}', 1)">+</button>
+                    </span>
+                `;
+                addedSection.appendChild(div);
+            });
+
+            totalItems.innerText = `Total Equipment Added: ${totalCount}`;
+        }
+
+        function changeQuantity(name, change) {
+            if (addedEquipment[name]) {
+                addedEquipment[name].quantity += change;
+                if (addedEquipment[name].quantity <= 0) {
+                    delete addedEquipment[name];
+                }
+                updateAddedEquipment();
+            }
+        }
+    </script>
+</body>
+</html>
